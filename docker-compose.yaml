@@ -1,0 +1,57 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-container
+    volumes:
+      - ./application:/var/www/html
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    ports:
+      - 80:80
+    
+    networks:
+      - nette-cms-network
+  
+  php:
+    build:
+      context: ./application
+      dockerfile: Dockerfile
+    container_name: php-container
+    environment:
+      - PHP_EXTENSION=pdo_mysql
+    volumes:
+      - ./application:/var/www/html
+    networks:
+      - nette-cms-network
+
+  
+  db:
+    image: mariadb:latest
+    container_name: mariadb-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - 3306:3306
+    networks:
+      - nette-cms-network
+  
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin-container
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - 8080:80
+    networks:
+      - nette-cms-network
+    depends_on:
+      - db
+
+networks:
+  nette-cms-network:
+    driver: bridge

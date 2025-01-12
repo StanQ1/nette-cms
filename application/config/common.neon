@@ -1,0 +1,18 @@
+parameters:
+
+
+application:
+	mapping:
+		Front: 'App\UI\FrontModule\**Presenter'
+		Admin: 'App\UI\AdminModule\**Presenter'
+
+
+latte:
+	strictTypes: yes
+	strictParsing: yes
+
+
+di:
+	export:
+		parameters: yes
+		tags: no

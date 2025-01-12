@@ -1,0 +1,8 @@
+# root directory
+vendor/
+temp/
+log/
+/composer.lock
+
+# config directory
+config/config.neon

@@ -1,0 +1,14 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+}
+
+.layout-sidebar {
+    border: 1px solid green;
+    width: 15vw;
+    height: 100vh;
+}
