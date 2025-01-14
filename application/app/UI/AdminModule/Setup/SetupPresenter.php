@@ -3,7 +3,6 @@
 namespace App\UI\AdminModule\Setup;
 
 use App\Core\BasePresenter;
-use App\Model\ConfigurationService;
 use Nette\Application\UI\Form;
 
 

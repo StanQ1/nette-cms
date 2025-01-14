@@ -2,8 +2,8 @@
 
 namespace App\Core;
 
+use App\Services\ConfigurationService;
 use Nette\Application\UI\Presenter;
-use App\Model\ConfigurationService;
 
 class BasePresenter extends Presenter
 {

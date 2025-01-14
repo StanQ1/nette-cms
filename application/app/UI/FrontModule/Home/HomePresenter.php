@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\UI\FrontModule\Home;
 
 use App\Core\BasePresenter;
-use App\Model\ConfigurationService;
-use Nette\Application\UI\Presenter;
 
 final class HomePresenter extends BasePresenter
 {

@@ -2,7 +2,7 @@
 
 namespace App\UI\AdminModule\Dashboard;
 
-use App\Model\ConfigurationService;
+use App\Services\ConfigurationService;
 use Nette\Application\UI\Presenter;
 
 final class DashboardPresenter extends Presenter
