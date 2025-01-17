@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UI\Front\Article;
+namespace App\UI\FrontModule\Article;
 
 use Nette\Application\UI\Presenter;
 
