@@ -7,11 +7,9 @@ use Nette\Application\UI\Presenter;
 
 final class ArticlePresenter extends Presenter
 {
-    private ArticleModel $articleModel;
-    public function __construct(ArticleModel $article)
+    public function __construct(private readonly ArticleModel $articleModel)
     {
         parent::__construct();
-        $this->articleModel = $article;
     }
     public function renderDefault(): void
     {

@@ -36,17 +36,20 @@ Before second step you must install, configure and start MYSQL server
 			user: 'root'
 			...
 
-3. Migrate basic tables
-	php vendor/bin/phinx migrate
+   3. Migrate basic tables
+       php vendor/bin/phinx migrate
 
-	Default admin login: cmshero
-	Default admin password: heropassword
+       Default admin login: cmshero
+       Default admin password: heropassword
 
-	!IMPORTANT! But if you using docker, you must migrate from docker container with command:
-		docker exec -it php-container bash
-		php vendor/bin/phinx migrate
-
-	Next instructions on web. Enjoy that!
+       !IMPORTANT! But if you using docker, you must migrate from docker container with command:
+           docker exec -it php-container bash
+           php vendor/bin/phinx migrate
+		
+           To create test content:
+              php vendor/bin/phinx seed:run
+   
+   Next instructions on web. Enjoy that!
 
 
 ---
@@ -90,14 +93,17 @@ Před druhým krokem musíte nainstalovat, nakonfigurovat a spustit MySQL server
 			user: 'root'
 			...
 
-3. Migrace základních tabulek:
-	php vendor/bin/phinx migrate
+   3. Migrace základních tabulek:
+       php vendor/bin/phinx migrate
 
-	Default admin login: cmshero
-	Default admin password: heropassword
+       Default admin login: cmshero
+       Default admin password: heropassword
 
-	!DŮLEŽITÉ! Jinak jestli používáte Docker, musíte migrace provést z kontejneru pomocí příkazu:
-		docker exec -it php-container bash
-		php vendor/bin/phinx migrate
+       !DŮLEŽITÉ! Jinak jestli používáte Docker, musíte migrace provést z kontejneru pomocí příkazu:
+           docker exec -it php-container bash
+           php vendor/bin/phinx migrate
 
-	Další instrukcí na webu. Užijte si to!
+   			Na vytváření testového contentu:
+         		php vendor/bin/phinx seed:run
+
+          Další instrukcí na webu. Užijte si to!
