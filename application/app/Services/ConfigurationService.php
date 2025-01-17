@@ -2,13 +2,10 @@
 
 namespace App\Services;
 
-class ConfigurationService
-{
-    public function __construct(
-        private \Nette\Database\Explorer $database
-        ){
-    }
+use App\Core\BaseModel;
 
+class ConfigurationService extends BaseModel
+{
     public function getConfigurationValue(string $key)
     {
         return $this->database->table('cms-config')

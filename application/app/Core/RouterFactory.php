@@ -17,13 +17,13 @@ final class RouterFactory
 		$router = new RouteList;
 		$router->withModule('Front')
 			->addRoute('/', 'Home:default')
-			->addRoute('/article/<id>', 'Article:default');	
+			->addRoute('/article/<id>', 'ArticleModel:default');
 		
 		// Funkce withPath() v podstate nefunguje a udelava v aplk. chybu 404, tak to napisu hardkodem
 		$router->withModule('Admin')
 			//ERROR: ->withPath('admin')
 			->addRoute('admin/dashboard', 'Dashboard:default')
-			->addRoute('admin/articles/<id>', 'Dashboard:default')
+			->addRoute('admin/articles', 'Article:default')
 			->addRoute('admin/configuration', 'Setup:default')
 			->addRoute('admin/setup-welcome', 'Setup:default')
 			->addRoute('admin/setup-project', 'Setup:setup');

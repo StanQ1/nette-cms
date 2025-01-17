@@ -1,7 +1,7 @@
 services:
 	- App\Core\RouterFactory::createRouter
 	- App\Services\ConfigurationService
-	
+	- App\Model\ArticleModel
 
 
 search:
