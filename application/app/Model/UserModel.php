@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use App\Core\BaseModel;
-use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
 class UserModel extends BaseModel
