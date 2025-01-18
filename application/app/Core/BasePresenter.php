@@ -7,12 +7,9 @@ use Nette\Application\UI\Presenter;
 
 class BasePresenter extends Presenter
 {
-    protected ConfigurationService $configurationService;
-
-    public function __construct(ConfigurationService $configurationService)
+    public function __construct(protected ConfigurationService $configurationService)
     {
         parent::__construct();
-        $this->configurationService = $configurationService;
     }
 
     protected function startup(): void

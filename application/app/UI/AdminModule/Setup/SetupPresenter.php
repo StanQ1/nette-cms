@@ -8,13 +8,9 @@ use Nette\Application\UI\Form;
 
 final class SetupPresenter extends BasePresenter
 {
-    // public function __construct(
-    //     private ConfigurationService $configurationService
-    // ){
-    // }
-
     protected function createComponentSettingsForm(): Form
     {
+        // TODO: transit to Forms/Admin
         $defaultProjectName = $this->configurationService->getConfigurationValue('project_name');
         $defaultAdminUsername = $this->configurationService->getConfigurationValue('admin_username');
 

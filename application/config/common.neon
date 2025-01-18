@@ -3,8 +3,9 @@ parameters:
 
 application:
 	mapping:
-		Front: 'App\UI\FrontModule\**Presenter'
-		Admin: 'App\UI\AdminModule\**Presenter'
+	    Front: 'App\UI\FrontModule\**Presenter'
+	    Admin: 'App\UI\AdminModule\**Presenter'
+	    Auth: 'App\UI\AuthModule\**Presenter'
 
 
 latte:
