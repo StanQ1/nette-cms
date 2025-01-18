@@ -30,7 +30,8 @@ final class RouterFactory
 
         $router->withModule('Auth')
             ->addRoute('auth/register', 'Register:default')
-            ->addRoute('auth/login', 'Login:default');
+            ->addRoute('auth/login', 'Login:default')
+            ->addRoute('auth/logout', 'Logout:default');
 		
 		return $router;
 	}

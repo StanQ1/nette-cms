@@ -42,7 +42,7 @@ class LoginPresenter extends BasePresenter
             $sessionSection->permissionLevel = $user->permissionLevel;
 
             $this->flashMessage('Successful!', 'success');
-            $this->redirect('Homepage:default');
+            $this->redirect(':Front:Home:default');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'error');
         }

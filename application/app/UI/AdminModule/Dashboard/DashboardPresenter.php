@@ -16,12 +16,15 @@ final class DashboardPresenter extends BasePresenter
             // Сесія існує, і користувач залогінений
             $userId = $sessionSection->userId;
             $username = $sessionSection->username;
+            $permissionLevel = $sessionSection->permissionLevel;
 
             // Наприклад, можна вивести дані
-            echo "User ID: $userId, Username: $username";
+            echo "User ID: $userId, Username: $username, PermissionLevel: $permissionLevel";
         } else {
             // Сесія не створена, користувач не залогінений
             echo "Користувач не залогінений.";
         }
+
+//        $this->getSession('user')->remove();
     }
 }
