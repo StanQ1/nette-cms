@@ -26,6 +26,10 @@ final class CreateUserLevelsTable extends AbstractMigration
 
         $default_configuration = [
             [
+                'name' => 'guest',
+                'permission_level' => 0,
+            ],
+            [
                 'name' => 'user',
                 'permission_level' => 1,
             ],
