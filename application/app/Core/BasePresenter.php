@@ -7,24 +7,29 @@ use Nette\Application\UI\Presenter;
 
 class BasePresenter extends Presenter
 {
-    protected ConfigurationService $configurationService;
-
-    public function __construct(ConfigurationService $configurationService)
+    public function __construct(protected ConfigurationService $configurationService)
     {
         parent::__construct();
-        $this->configurationService = $configurationService;
     }
 
     protected function startup(): void
     {
         parent::startup();
-        
-        if (!$this->configurationService->getConfigurationValue('is_ready_to_use')
-            && (!$this->isLinkCurrent(':Admin:Setup:default')
-            && !$this->isLinkCurrent(':Admin:Setup:setup'))
+
+        $appIsReady = $this->configurationService->getConfigurationValue('is_ready_to_use');
+
+        if ($appIsReady
+            && $this->isModuleCurrent('Admin')
+            && $this->getSession()->getSection('user')->get('permissionLevel') < 2
+        ) {
+            $this->redirect(':Front:Home:default');
+        }
+
+        if (
+            !$appIsReady && !$this->isModuleCurrent('Setup')
         ) {
 
-            $this->redirect(':Admin:Setup:default');
+            $this->redirect(':Setup:Setup:default');
         }
     }
 }

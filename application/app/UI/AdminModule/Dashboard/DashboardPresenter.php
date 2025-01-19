@@ -2,18 +2,12 @@
 
 namespace App\UI\AdminModule\Dashboard;
 
-use App\Services\ConfigurationService;
-use Nette\Application\UI\Presenter;
+use App\Core\BasePresenter;
 
-final class DashboardPresenter extends Presenter
+final class DashboardPresenter extends BasePresenter
 {
-    public function __construct(
-        private ConfigurationService $configurationService
-    ){
-    }
-    
     public function renderDefault(): void
     {
-        
+
     }
 }

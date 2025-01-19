@@ -1,11 +1,13 @@
 services:
 	- App\Core\RouterFactory::createRouter
-	- App\Services\ConfigurationService
-	- App\Model\ArticleModel
+	- App\Forms\Auth\RegistrationForm
 
 
 search:
 	-	in: %appDir%
 		classes:
 			- *Factory
+			- *Model
+			- *Service
 			- *Facade
+			- *Form

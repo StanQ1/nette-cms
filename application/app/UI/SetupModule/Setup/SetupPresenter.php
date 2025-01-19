@@ -1,6 +1,6 @@
 <?php
 
-namespace App\UI\AdminModule\Setup;
+namespace App\UI\SetupModule\Setup;
 
 use App\Core\BasePresenter;
 use Nette\Application\UI\Form;
@@ -8,13 +8,9 @@ use Nette\Application\UI\Form;
 
 final class SetupPresenter extends BasePresenter
 {
-    // public function __construct(
-    //     private ConfigurationService $configurationService
-    // ){
-    // }
-
     protected function createComponentSettingsForm(): Form
     {
+        // TODO: transit to Forms/Admin
         $defaultProjectName = $this->configurationService->getConfigurationValue('project_name');
         $defaultAdminUsername = $this->configurationService->getConfigurationValue('admin_username');
 
@@ -42,7 +38,7 @@ final class SetupPresenter extends BasePresenter
         $this->configurationService->setConfigurationValue('is_ready_to_use', 1);
 
         $this->flashMessage('Data is successful updated!');
-        $this->redirect('Dashboard:default');
+        $this->redirect(':Front:Home:default');
     }
 
     public function renderDefault(): void

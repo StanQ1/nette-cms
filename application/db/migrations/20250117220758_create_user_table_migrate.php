@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class ArticleTableMigration extends AbstractMigration
+final class CreateUserTableMigrate extends AbstractMigration
 {
     /**
      * Change Method.
@@ -19,16 +19,16 @@ final class ArticleTableMigration extends AbstractMigration
      */
     public function up(): void
     {
-        $table = $this->table('articles');
-        $table->addColumn('category_id', 'integer');
-        $table->addColumn('title', 'string');
-        $table->addColumn('content', 'text');
-        $table->addColumn('published_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP']);
+        $table = $this->table('users');
+        $table->addColumn('username', 'string', ['limit' => 20, 'null' => false]);
+        $table->addColumn('password', 'string', ['null' => false]);
+        $table->addColumn('permissionLevel', 'integer', ['default' => 1]);
+        $table->addIndex(['username'], ['unique' => true]);
         $table->create();
     }
 
     public function down(): void
     {
-        $this->table('articles')->drop()->save();
+        $this->table('users')->drop()->save();
     }
 }
