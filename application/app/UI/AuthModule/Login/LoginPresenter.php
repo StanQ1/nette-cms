@@ -6,7 +6,6 @@ use App\Core\BasePresenter;
 use App\Forms\Auth\LoginForm;
 use App\Model\UserModel;
 use App\Services\ConfigurationService;
-use App\Services\UserService;
 use Nette\Application\UI\Form;
 
 class LoginPresenter extends BasePresenter

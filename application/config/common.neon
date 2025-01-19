@@ -3,6 +3,7 @@ parameters:
 
 application:
 	mapping:
+	    Setup: 'App\UI\SetupModule\**Presenter'
 	    Front: 'App\UI\FrontModule\**Presenter'
 	    Admin: 'App\UI\AdminModule\**Presenter'
 	    Auth: 'App\UI\AuthModule\**Presenter'
