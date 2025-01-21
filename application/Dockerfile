@@ -8,5 +8,3 @@ RUN apt-get update && apt-get install -y libzip-dev libicu-dev libonig-dev \
 RUN mkdir -p ./application/temp ./application/log \
     && chmod -R 775 ./application/temp \
     && chmod -R 775 ./application/log
-
-RUN composer install
