@@ -5,7 +5,7 @@ use Nette\Neon\Neon;
 $configFile = __DIR__ . '/config/config.neon';
 
 if (!file_exists($configFile)) {
-    echo "Configure your config.neon by instruction in readme.md file";
+    echo "Configure your config.neon by instruction in README.md file";
 }
 
 $dbConfig = Neon::decodeFile($configFile)['database'];
