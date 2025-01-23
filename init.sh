@@ -2,9 +2,9 @@
 echo "!IMPORTANT! DON'T FORGET ABOUT WRITING YOUR OWN DATA INTO CONFIGS LIKE A .ENV IN PROJECT CORE AND CONFIG.NEON IN CONFIG FOLDER"
 
 echo "Creating writable dirs with right permissions"
-sudo docker exec -it php-container mkdir -p ./application/temp ./application/log
-sudo docker exec -it php-container chmod -R 775 ./application/temp
-sudo docker exec -it php-container chmod -R 775 ./application/log
+sudo docker exec -it php-container mkdir -p ./temp ./log
+sudo docker exec -it php-container chmod -R 775 ./temp
+sudo docker exec -it php-container chmod -R 775 ./log
 
 echo "Installing dependencies"
 sudo docker exec -it php-container composer update
