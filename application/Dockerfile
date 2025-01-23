@@ -10,5 +10,3 @@ WORKDIR /var/www/html
 RUN mkdir -p ./application/temp ./application/log \
     && chmod -R 775 ./application/temp \
     && chmod -R 775 ./application/log
-
-COPY ./config.example.neon ./config/config.neon
