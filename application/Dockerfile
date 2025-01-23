@@ -5,6 +5,10 @@ RUN apt-get update && apt-get install -y libzip-dev libicu-dev libonig-dev \
     && docker-php-ext-install pdo pdo_mysql mbstring zip intl fileinfo \
     && apt-get clean
 
+WORKDIR /var/www/html
+
 RUN mkdir -p ./application/temp ./application/log \
     && chmod -R 775 ./application/temp \
     && chmod -R 775 ./application/log
+
+COPY ./config.example.neon ./config/config.neon
