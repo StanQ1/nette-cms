@@ -1,4 +1,6 @@
+# All of that DEFAULT VALUES. Please, write down your own by security reasons
+
 database:
-	dsn:
-	user:
-	password:
+	dsn: 'mysql:host=db;dbname=nette-cms-database;'
+	user: 'root'
+	password: 'cmshero'

@@ -50,7 +50,7 @@ class Bootstrap
 		if (file_exists($configDir . '/config.neon')) {
 			$this->configurator->addConfig($configDir . '/config.neon');
 		} else {
-			echo "Configure your config.neon by instruction in readme.md file";
+			echo "Configure your config.neon by instruction in README.md file";
 			die();
 		}
 	}
