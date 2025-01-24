@@ -52,3 +52,8 @@ rollback:
 # Clear nette cache
 clean:
 	docker exec -it $(PHP_CONTAINER) rm -rf ./temp/cache
+
+# Tests
+
+test:
+	docker exec -it $(PHP_CONTAINER) vendor/bin/tester tests
