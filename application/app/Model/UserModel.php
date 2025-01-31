@@ -23,4 +23,9 @@ class UserModel extends BaseModel
     {
         return $this->database->table($this->table)->where("username", $username);
     }
+
+    public function findById(int $id): Selection
+    {
+        return $this->database->table($this->table)->where("id", $id);
+    }
 }

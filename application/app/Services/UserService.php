@@ -12,7 +12,10 @@ class UserService extends BaseModel
         parent::__construct($database);
     }
 
-    public function createUser(string $username, string $password): void
+    /**
+     * @throws \Exception
+     */
+    public function createUser(string $username, string $password, int $permissionLevel = 1): void
     {
         if (!is_null($this->userModel->findByUsername($username)->fetch())) {
             throw new \Exception("Username already exists");
@@ -21,10 +24,20 @@ class UserService extends BaseModel
         $result = $this->database->table($this->userModel->getTableName())->insert([
             'username' => $username,
             'password' => password_hash($password, PASSWORD_BCRYPT),
+            'permissionLevel' => $permissionLevel,
         ]);
 
         if (!$result) {
             throw new \Exception('Failed to create user');
         }
+    }
+
+    public function editUser(int $id, string $username, $password): void
+    {
+        $user = $this->userModel->findById($id);
+        $user->insert([
+            'username' => $username,
+            'password' => password_hash($password, PASSWORD_BCRYPT),
+        ]);
     }
 }

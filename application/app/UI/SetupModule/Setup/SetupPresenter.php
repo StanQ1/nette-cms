@@ -4,10 +4,14 @@ namespace App\UI\SetupModule\Setup;
 
 use App\Core\BasePresenter;
 use Nette\Application\UI\Form;
+use App\Services\UserService;
+use Nette\DI\Attributes\Inject;
 
 
 final class SetupPresenter extends BasePresenter
 {
+    #[Inject]
+    public UserService $userService;
     protected function createComponentSettingsForm(): Form
     {
         // TODO: transit to Forms/Admin
@@ -33,9 +37,16 @@ final class SetupPresenter extends BasePresenter
     public function settingsFormSucceded(Form $form, $data): void
     {
         $this->configurationService->setConfigurationValue('project_name', $data->project_name);
-        $this->configurationService->setConfigurationValue('admin_username', $data->admin_username);
-        $this->configurationService->setConfigurationValue('admin_password', password_hash($data->admin_password, PASSWORD_BCRYPT));
-        $this->configurationService->setConfigurationValue('is_ready_to_use', 1);
+
+        // Create admin in DB while first setup
+        if ($this->configurationService->getConfigurationValue('is_ready_to_use') == 0) {
+            $this->userService->createUser($data->admin_username, $data->admin_password, 2);
+            $this->configurationService->setConfigurationValue('is_ready_to_use', 1);
+        } else {
+            $this->configurationService->setConfigurationValue('admin_username', $data->admin_username);
+            $this->configurationService->setConfigurationValue('admin_password', password_hash($data->admin_password, PASSWORD_BCRYPT));
+            $this->userService->editUser($this->getSession()->getSection('user')->get('id'), $data->admin_username,  $data->admin_password);
+        }
 
         $this->flashMessage('Data is successful updated!');
         $this->redirect(':Front:Home:default');
