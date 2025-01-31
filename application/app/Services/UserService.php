@@ -35,7 +35,7 @@ class UserService extends BaseModel
     public function editUser(int $id, string $username, $password): void
     {
         $user = $this->userModel->findById($id);
-        $user->insert([
+        $user->update([
             'username' => $username,
             'password' => password_hash($password, PASSWORD_BCRYPT),
         ]);
