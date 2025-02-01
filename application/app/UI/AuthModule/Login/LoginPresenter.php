@@ -28,22 +28,26 @@ class LoginPresenter extends BasePresenter
 
     public function processLoginForm(Form $form, $values): void
     {
-        try {
-            $user = $this->userModel->findByUsername($values->username)->fetch();
+        $user = $this->userModel->findByUsername($values->username)->fetch();
+        $sessionSection = $this->getSession('user');
 
+        try {
             if (!$user || !password_verify($values->password, $user->password)) {
                 throw new \Exception('Wrong username or password');
             }
 
-            $sessionSection = $this->getSession('user');
             $sessionSection->userId = $user->id;
             $sessionSection->username = $user->username;
             $sessionSection->permissionLevel = $user->permissionLevel;
 
-            $this->flashMessage('Successful!', 'success');
-            $this->redirect(':Front:Home:default');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'error');
+        }
+
+        if ($sessionSection->permissionLevel == 2) {
+            $this->redirect(':Admin:Dashboard:default');
+        } else {
+            $this->redirect(':Front:Home:default');
         }
     }
 
