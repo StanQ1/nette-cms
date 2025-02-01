@@ -1,6 +1,9 @@
-{foreach $articles as $article}
-    <p>{$article->title}</p>
-    <p>{$article->content}</p>
-    <p>{$article->published_at}</p>
-    <br>
-{/foreach}
+{layout ../../@layout.latte}
+
+{block content}
+    {foreach $articles as $article}
+        <p>{$article->title}</p>
+        <p>{$article->content}</p>
+        <p>{$article->published_at}</p>
+        <br>
+    {/foreach}
