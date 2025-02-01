@@ -22,7 +22,7 @@ class BasePresenter extends Presenter
             && $this->isModuleCurrent('Admin')
             && $this->getSession()->getSection('user')->get('permissionLevel') < 2
         ) {
-            $this->redirect(':Front:Home:default');
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
         }
 
         if (
