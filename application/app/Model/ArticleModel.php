@@ -14,10 +14,19 @@ class ArticleModel extends BaseModel
         return $this->database->table($this->table);
     }
 
-    public function findAllByCategoryId(string $category_name): \Nette\Database\Table\Selection
+    public function getTableName(): string
     {
-        $category = $this->database->table($this->category_table)->where('category_name', $category_name)->first();
-        return $this->database->table($this->table)->where('category_id', $category->category_id)->fetchAll();
+        return $this->table;
+    }
+
+    public function getCategoryTableName(): string
+    {
+        return $this->category_table;
+    }
+
+    public function findAllByCategoryId(int $category_id): \Nette\Database\Table\Selection
+    {
+        return $this->database->table($this->table)->where('category_id', $category_id)->fetchAll();
     }
 
     public function findById(int $id): \Nette\Database\Table\ActiveRow
