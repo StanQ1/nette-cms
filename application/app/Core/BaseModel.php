@@ -2,10 +2,10 @@
 
 namespace App\Core;
 
+use Nette\DI\Attributes\Inject;
+
 class BaseModel
 {
-    public function __construct(
-        protected \Nette\Database\Explorer $database
-    ){
-    }
+    #[Inject]
+    protected \Nette\Database\Explorer $database;
 }
