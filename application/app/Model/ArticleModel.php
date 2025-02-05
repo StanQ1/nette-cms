@@ -34,17 +34,17 @@ class ArticleModel extends BaseModel
         return $this->database->table($this->table)->where('id', $id)->first();
     }
 
-    public function insert(array $data): int
+    public function insert(array $data): bool
     {
         return $this->database->table($this->table)->insert($data);
     }
 
-    public function update(int $id, array $data): int
+    public function update(int $id, array $data): bool
     {
         return $this->database->table($this->table)->where('id', $id)->update($data);
     }
 
-    public function delete(int $id): int
+    public function delete(int $id): bool
     {
         return $this->database->table($this->table)->where('id', $id)->delete();
     }

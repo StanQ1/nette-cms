@@ -11,33 +11,31 @@ use Nette\Database\Table\Selection;
 class ArticleService extends BaseModel
 {
     public function __construct(
-        \Nette\Database\Explorer $database,
         private readonly ArticleModel $articleModel
     ){
-        parent::__construct($database);
     }
 
-    public function createArticle(string $title, int $category_id, string $content): void
+    public function createArticle(string $title, int $category_id, string $content): bool
     {
-        $this->articleModel->insert([
+        return $this->articleModel->insert([
             'title' => $title,
             'category_id' => $category_id,
             'content' => $content,
         ]);
     }
 
-    public function editArticle(int $id, string $title, int $category_id, string $content): void
+    public function editArticle(int $id, string $title, int $category_id, string $content): bool
     {
-        $this->articleModel->findById($id)->update([
+        return $this->articleModel->findById($id)->update([
             'title' => $title,
             'category_id' => $category_id,
             'content' => $content,
         ]);
     }
 
-    public function deleteArticle(int $id): void
+    public function deleteArticle(int $id): bool
     {
-        $this->articleModel->findById($id)->delete();
+        return $this->articleModel->findById($id)->delete();
     }
 
     public function getAllArticles(): Selection
