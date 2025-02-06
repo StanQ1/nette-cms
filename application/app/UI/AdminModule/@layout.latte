@@ -37,7 +37,6 @@
 <body>
 
 <div class="d-flex">
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 	<!-- Sidebar -->
 	<div class="sidebar">
 		<h4 class="text-center">NetteCMS</h4>
@@ -51,6 +50,7 @@
 	<!-- Main Content -->
 	<div class="main-content">
 		<main>
+			<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 			{include content}
 		</main>
 	</div>
