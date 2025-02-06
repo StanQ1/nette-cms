@@ -8,6 +8,6 @@ final class DashboardPresenter extends BasePresenter
 {
     public function renderDefault(): void
     {
-
+        $this->template->username = $this->getSession('user')->username;
     }
 }
