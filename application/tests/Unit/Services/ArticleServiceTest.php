@@ -65,7 +65,15 @@ class ArticleServiceTest extends TestCase
      */
     public function testEditArticle(): void
     {
+        $mockObject = $this->createMock(ActiveRow::class);
         $this->articleModelMock
+            ->expects($this->once())
+            ->method('findById')
+            ->with(2)
+            ->willReturn($mockObject);
+
+        $this->articleModelMock
+            ->expects($this->once())
             ->method('update')
             ->with(
                 id: 1,
@@ -90,11 +98,13 @@ class ArticleServiceTest extends TestCase
     {
         $mockObject = $this->createMock(ActiveRow::class);
         $this->articleModelMock
+            ->expects($this->once())
             ->method('findById')
             ->with(2)
             ->willReturn($mockObject);
 
         $this->articleModelMock
+            ->expects($this->once())
             ->method('delete')
             ->willReturn(1);
 
@@ -113,6 +123,7 @@ class ArticleServiceTest extends TestCase
         $mockObject = $this->createMock(Selection::class);
 
         $this->articleModelMock
+            ->expects($this->once())
             ->method('findAll')
             ->willReturn($mockObject);
 
@@ -127,6 +138,7 @@ class ArticleServiceTest extends TestCase
     {
         $mockObject = $this->createMock(Selection::class);
         $this->articleModelMock
+            ->expects($this->once())
             ->method('findAllByCategoryId')
             ->willReturn($mockObject);
 

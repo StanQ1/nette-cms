@@ -30,14 +30,18 @@ class ArticleService extends BaseModel
 
     public function editArticle(int $articleId, string $title, int $categoryId, string $content): bool
     {
-        return $this->articleModel->update(
-            id: $articleId,
-            data: [
-                'title' => $title,
-                'category_id' => $categoryId,
-                'content' => $content,
-            ],
-        );
+        if (!is_null($this->articleModel->findById($articleId))) {
+            return $this->articleModel->update(
+                id: $articleId,
+                data: [
+                    'title' => $title,
+                    'category_id' => $categoryId,
+                    'content' => $content,
+                ],
+            );
+        } else {
+            return false;
+        }
     }
 
     public function deleteArticle(int $id): bool
