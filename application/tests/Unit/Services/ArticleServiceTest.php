@@ -84,13 +84,18 @@ class ArticleServiceTest extends TestCase
 
     /**
      * @testdox Delete article
+     * @throws Exception
      */
     public function testDeleteArticle(): void
     {
+        $mockObject = $this->createMock(ActiveRow::class);
         $this->articleModelMock
-            ->expects($this->once())
+            ->method('findById')
+            ->with(2)
+            ->willReturn($mockObject);
+
+        $this->articleModelMock
             ->method('delete')
-            ->with(id: 2)
             ->willReturn(1);
 
         $result = $this->articleService->deleteArticle(2);
