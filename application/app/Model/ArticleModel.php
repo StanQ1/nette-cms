@@ -29,7 +29,7 @@ class ArticleModel extends BaseModel
         return $this->database->table($this->table)->where('category_id', $category_id);
     }
 
-    public function findById(int $id): \Nette\Database\Table\ActiveRow
+    public function findById(int $id): \Nette\Database\Table\ActiveRow|null
     {
         return $this->database->table($this->table)->get($id);
     }
