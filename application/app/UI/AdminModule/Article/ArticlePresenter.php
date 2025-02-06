@@ -18,6 +18,7 @@ final class ArticlePresenter extends Presenter
     public function renderDefault(): void
     {
         $this->template->articles = $this->articleService->getAllArticles();
+        $this->template->categories = $this->articleService->getAllCategories();
     }
 
     protected function createComponentArticleCreateForm(): Form
@@ -92,6 +93,15 @@ final class ArticlePresenter extends Presenter
             ]);
 
         $this->template->article = $currentArticle;
+    }
+
+    public function renderCategory(int $id): void
+    {
+        $this->template->category = $this->articleService
+            ->getAllCategories()->get($id)->category_name;
+
+        $this->template->articles = $this->articleService
+            ->getArticlesByCategoryId($id);
     }
 
     public function actionDelete(int $id): void
