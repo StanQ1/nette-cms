@@ -16,11 +16,17 @@ class ArticleService extends BaseModel
 
     public function createArticle(string $title, int $categoryId, string $content): bool
     {
-        return $this->articleModel->insert([
-            'title' => $title,
-            'category_id' => $categoryId,
-            'content' => $content,
-        ]);
+        try {
+            $this->articleModel->insert([
+                'title' => $title,
+                'category_id' => $categoryId,
+                'content' => $content,
+            ]);
+
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 
     public function findArticleById(int $id): ActiveRow|null
@@ -30,8 +36,8 @@ class ArticleService extends BaseModel
 
     public function editArticle(int $articleId, string $title, int $categoryId, string $content): bool
     {
-        if (!is_null($this->articleModel->findById($articleId))) {
-            return $this->articleModel->update(
+        try {
+            $this->articleModel->update(
                 id: $articleId,
                 data: [
                     'title' => $title,
@@ -39,7 +45,9 @@ class ArticleService extends BaseModel
                     'content' => $content,
                 ],
             );
-        } else {
+
+            return true;
+        } catch (\Exception $e) {
             return false;
         }
     }
@@ -62,5 +70,10 @@ class ArticleService extends BaseModel
     public function getArticlesByCategoryId(int $categoryId): Selection
     {
         return $this->articleModel->findAllByCategoryId($categoryId);
+    }
+
+    public function getAllCategories(): Selection
+    {
+        return $this->articleModel->findAllCategories();
     }
 }
