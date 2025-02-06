@@ -28,7 +28,7 @@ final class RouterFactory
 		$router->withModule('Admin')
 			//ERROR: ->withPath('admin')
 			->addRoute('admin', 'Dashboard:default')
-			->addRoute('admin/articles', 'Article:default');
+			->addRoute('admin/article/<action>[/<id>]', 'Article:default');
 
         $router->withModule('Auth')
             ->addRoute('auth/register', 'Register:default')
