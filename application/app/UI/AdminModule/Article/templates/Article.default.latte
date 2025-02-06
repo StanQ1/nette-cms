@@ -6,11 +6,12 @@
 
 {* TODO: Add search form to finding some articles by properties ( & ElasticSearch ) *}
 {block content}
+    <a n:href="create">Create New Article</a>
     {foreach $articles as $article}
         <p>{$article->title}</p>
         <p>{$article->content}</p>
         <p>{$article->published_at}</p>
-        <a n:href=":Admin:Article:edit $article->id">Edit</a>
-        <a n:href=":Admin:Article:delete $article->id">Delete</a>
+        <a n:href="edit $article->id">Edit</a>
+        <a n:href="delete $article->id">Delete</a>
         <hr>
     {/foreach}
