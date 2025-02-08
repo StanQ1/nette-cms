@@ -5,6 +5,7 @@ namespace App\UI\AuthModule\Register;
 use App\Core\BasePresenter;
 use App\Forms\Auth\RegistrationForm;
 use App\Model\UserModel;
+use App\Services\ActionLogService;
 use App\Services\ConfigurationService;
 use App\Services\UserService;
 use Nette\Application\UI\Form;
@@ -15,9 +16,8 @@ class RegisterPresenter extends BasePresenter
         private readonly RegistrationForm       $form,
         private readonly UserService            $userService,
         private readonly UserModel $userModel,
-        protected ConfigurationService $configurationService,
+        private readonly  ActionLogService $actionLogService,
     ){
-        parent::__construct($this->configurationService);
     }
 
     protected function createComponentRegisterForm(): Form
@@ -43,6 +43,11 @@ class RegisterPresenter extends BasePresenter
             $sessionSection->userId = $user->id;
             $sessionSection->username = $user->username;
             $sessionSection->permissionLevel = $user->permissionLevel;
+
+            $this->actionLogService->createActionLog(
+                executorId: $sessionSection->userId,
+                action: "User $sessionSection->username successfully registered",
+            );
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'error');
         }

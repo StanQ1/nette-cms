@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\Core\BaseModel;
+use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
 class UserModel extends BaseModel
@@ -24,8 +25,8 @@ class UserModel extends BaseModel
         return $this->database->table($this->table)->where("username", $username);
     }
 
-    public function findById(int $id): Selection
+    public function findById(int $id): ActiveRow
     {
-        return $this->database->table($this->table)->where("id", $id);
+        return $this->database->table($this->table)->get($id);
     }
 }

@@ -4,12 +4,16 @@ namespace App\Services;
 
 use App\Core\BaseModel;
 use App\Model\UserModel;
+use Nette\Database\Explorer;
+use Nette\Database\Table\Selection;
 
 class UserService extends BaseModel
 {
-    public function __construct(\Nette\Database\Explorer $database, private readonly UserModel $userModel)
-    {
-        parent::__construct($database);
+    public function __construct(
+        private readonly UserModel $userModel,
+        private readonly Explorer $explorer
+    ){
+        parent::__construct($this->explorer);
     }
 
     /**
@@ -30,6 +34,11 @@ class UserService extends BaseModel
         if (!$result) {
             throw new \Exception('Failed to create user');
         }
+    }
+
+    public function findUserByUsername(string $username): Selection
+    {
+        return $this->userModel->findByUsername($username);
     }
 
     public function editUser(int $id, string $username, $password): void

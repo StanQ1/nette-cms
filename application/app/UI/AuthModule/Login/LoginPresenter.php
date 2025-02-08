@@ -5,7 +5,7 @@ namespace App\UI\AuthModule\Login;
 use App\Core\BasePresenter;
 use App\Forms\Auth\LoginForm;
 use App\Model\UserModel;
-use App\Services\ConfigurationService;
+use App\Services\ActionLogService;
 use Nette\Application\UI\Form;
 
 class LoginPresenter extends BasePresenter
@@ -13,9 +13,8 @@ class LoginPresenter extends BasePresenter
     public function __construct(
         private readonly LoginForm              $form,
         private readonly UserModel            $userModel,
-        protected ConfigurationService $configurationService,
+        private readonly ActionLogService $actionLogService,
     ){
-        parent::__construct($this->configurationService);
     }
 
     public function createComponentLoginForm(): Form
@@ -45,6 +44,10 @@ class LoginPresenter extends BasePresenter
         }
 
         if ($sessionSection->permissionLevel == 2) {
+            $this->actionLogService->createActionLog(
+                executorId: $sessionSection->userId,
+                action: "User $sessionSection->username have logged in administration module",
+            );
             $this->redirect(':Admin:Dashboard:default');
         } else {
             $this->redirect(':Front:Home:default');

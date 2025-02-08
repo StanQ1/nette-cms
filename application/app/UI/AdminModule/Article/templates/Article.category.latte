@@ -1,0 +1,17 @@
+{layout ../../@layout.latte}
+
+{block title}
+    {$category} Articles
+{/block}
+
+{block content}
+<h3>{$category} Articles</h3>
+<hr>
+{foreach $articles as $article}
+    <h5>{$article->title}</h5>
+    <p>{$article->content}</p>
+    <p>{$article->published_at}</p>
+    <a n:href="edit $article->id">Edit</a>
+    <a n:href="delete $article->id">Delete</a>
+    <hr>
+{/foreach}

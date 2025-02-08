@@ -2,10 +2,14 @@
 
 namespace App\Core;
 
+use Nette\Database\Explorer;
+
 class BaseModel
 {
-    public function __construct(
-        protected \Nette\Database\Explorer $database
-    ){
+    protected Explorer $database;
+
+    public function __construct(Explorer $database)
+    {
+        $this->database = $database;
     }
 }

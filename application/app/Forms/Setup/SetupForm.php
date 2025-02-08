@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Forms\Admin;
-
-use Nette\Application\UI\Form;
+namespace App\Forms\Setup;
 
 class SetupForm
 {

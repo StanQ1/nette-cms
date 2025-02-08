@@ -1,9 +1,23 @@
 {layout ../../@layout.latte}
 
+{block title}
+    Articles
+{/block}
+
+{* TODO: Add search form to finding some articles by properties ( & ElasticSearch ) *}
 {block content}
+    <h3>All Articles</h3>
+    <a n:href="create">Create New Article</a>
+    <hr>
     {foreach $articles as $article}
-        <p>{$article->title}</p>
+        <h5>{$article->title}</h5>
         <p>{$article->content}</p>
-        <p>{$article->published_at}</p>
-        <br>
+        <p>{$article->published_at} –
+            <a n:href="category $article->category_id">
+                {$categories->get($article->category_id)->category_name}
+            </a>
+        </p>
+        <a n:href="edit $article->id">Edit</a>
+        <a n:href="delete $article->id">Delete</a>
+        <hr>
     {/foreach}
