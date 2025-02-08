@@ -28,7 +28,10 @@ final class RouterFactory
 		$router->withModule('Admin')
 			//ERROR: ->withPath('admin')
 			->addRoute('admin', 'Dashboard:default')
-			->addRoute('admin/article/<action>[/<id>]', 'Article:default');
+            ->addRoute('admin/monitoring', 'Dashboard:monitoring')
+            // TODO: Users have access to dynamic paths
+			->addRoute('admin/article/<action>[/<id>]', 'Article:default')
+            ->addRoute('admin/category/<action>[/<id>]', 'Category:default');
 
         $router->withModule('Auth')
             ->addRoute('auth/register', 'Register:default')
