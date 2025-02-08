@@ -4,13 +4,12 @@ namespace App\Core;
 
 use App\Services\ConfigurationService;
 use Nette\Application\UI\Presenter;
+use Nette\DI\Attributes\Inject;
 
 class BasePresenter extends Presenter
 {
-    public function __construct(protected ConfigurationService $configurationService)
-    {
-        parent::__construct();
-    }
+    #[Inject]
+    public ConfigurationService $configurationService;
 
     protected function startup(): void
     {
@@ -20,6 +19,14 @@ class BasePresenter extends Presenter
 
         if ($appIsReady
             && $this->isModuleCurrent('Admin')
+            && $this->getSession()->getSection('user')->get('permissionLevel') < 2
+        ) {
+            $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
+        }
+
+        if (
+            $appIsReady
+            && $this->isModuleCurrent('Setup')
             && $this->getSession()->getSection('user')->get('permissionLevel') < 2
         ) {
             $this->error('Forbidden', \Nette\Http\IResponse::S403_FORBIDDEN);
