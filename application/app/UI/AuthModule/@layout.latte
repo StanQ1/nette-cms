@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{include title} | NetteCMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .auth-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .auth-container h2 {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            font-weight: 600;
+            border-radius: 8px;
+            background-color: #007bff;
+            border: none;
+            transition: background 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .auth-footer a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+    {include content}
+</div>
+
+</body>
+</html>

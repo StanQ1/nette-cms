@@ -1,6 +1,25 @@
-Login page
-<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">
-    {$flash->message}
-</div>
+{extends ./../../@layout.latte}
 
-{control loginForm}
+{block title}
+    Login
+{/block}
+
+{block content}
+<h2>Login</h2>
+<form n:name="loginForm">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input n:name="username" class="form-control" id="username" placeholder="Enter username">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input n:name="password" type="password" class="form-control" id="password" placeholder="Enter password">
+    </div>
+
+    <button n:name="send" class="btn btn-primary">Login</button>
+
+    <div class="auth-footer">
+        <p>Don't have an account? <a n:href="Register:default">Register here</a></p>
+    </div>
+</form>
