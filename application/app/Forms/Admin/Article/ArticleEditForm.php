@@ -19,7 +19,7 @@ class ArticleEditForm
 
         foreach ($categories as $category) {
             $processedCategories[] = [
-                $category->category_id => $category->category_name,
+                $category->id => $category->category_name,
             ];
         }
 

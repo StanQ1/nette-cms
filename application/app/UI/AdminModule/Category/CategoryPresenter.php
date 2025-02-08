@@ -6,6 +6,7 @@ use App\Core\BasePresenter;
 use App\Forms\Admin\Category\CategoryCreateForm;
 use App\Forms\Admin\Category\CategoryEditForm;
 use App\Services\ActionLogService;
+use App\Services\ArticleService;
 use App\Services\CategoryService;
 use Nette\Application\UI\Form;
 
@@ -14,6 +15,7 @@ final class CategoryPresenter extends BasePresenter
     public function __construct(
         private readonly ActionLogService $actionLogService,
         private readonly CategoryService $categoryService,
+        private readonly ArticleService $articleService,
     ){
     }
     public function renderDefault(): void
@@ -102,14 +104,23 @@ final class CategoryPresenter extends BasePresenter
         $categoryName = $this->categoryService->getCategoryById($id)->category_name;
         $user = $this->getSession()->getSection('user');
 
-        if ($this->categoryService->deleteCategory($id)) {
-            $this->actionLogService->createActionLog(
-                executorId: $user->userId,
-                action: "User $user->username has deleted a \"$categoryName\" category",
-            );
-            $this->flashMessage("Category \"$categoryName\" has been deleted.");
+        if ($id != 1) {
+            if ($this->categoryService->deleteCategory($id)) {
+                $this->actionLogService->createActionLog(
+                    executorId: $user->userId,
+                    action: "User $user->username has deleted a \"$categoryName\" category",
+                );
+
+                $this->articleService->getArticlesByCategoryId($id)->update([
+                    'category_id' => 1,
+                ]);
+
+                $this->flashMessage("Category \"$categoryName\" has been deleted.");
+            } else {
+                $this->flashMessage("Category \"$categoryName\" was not deleted.");
+            }
         } else {
-            $this->flashMessage("Category \"$categoryName\" was not deleted.");
+            $this->flashMessage("YOU CAN'T DELETE <b>UNSORTED</b> CATEGORY!");
         }
 
         $this->redirect('default');

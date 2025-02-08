@@ -26,13 +26,9 @@ class CategoryService extends BaseModel
 
     public function createCategory(string $categoryName): bool
     {
-        // TODO: [Hot Fix] fixed category_id incrementing
-        $lastCategory = $this->database->table($this->table)->max('category_id');
-
         try {
             $this->database->table($this->table)->insert([
                 'category_name' => $categoryName,
-                'category_id' => $lastCategory + 1,
             ]);
 
             return true;

@@ -18,17 +18,17 @@ class ArticleSeeder extends AbstractSeed
     {
         $data = [
             [
-                'category_id' => 1,
+                'category_id' => 2,
                 'title' => 'My Routine',
                 'content' => 'Hello Everybody! That\'s my first post in blog and today we start to talking about my everyday routine.',
             ],
             [
-                'category_id' => 1,
+                'category_id' => 2,
                 'title' => 'My Animals',
                 'content' => 'I have some animals, which likes to play with my old toys and today I have walked with.',
             ],
             [
-                'category_id' => 2,
+                'category_id' => 3,
                 'title' => 'CMS Project',
                 'content' => 'I started writing my own CMS system on Nette framework with some popular technologies in IT world.',
             ],
@@ -37,11 +37,9 @@ class ArticleSeeder extends AbstractSeed
         $categories = [
             [
                 'category_name' => 'Lifestyle',
-                'category_id' => 1,
             ],
             [
                 'category_name' => 'IT',
-                'category_id' => 2,
             ]
         ];
 

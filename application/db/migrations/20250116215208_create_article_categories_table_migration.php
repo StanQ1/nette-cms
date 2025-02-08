@@ -21,8 +21,11 @@ final class CreateArticleCategoriesTableMigration extends AbstractMigration
     {
         $table = $this->table('article_categories');
         $table->addColumn('category_name', 'string');
-        $table->addColumn('category_id', 'integer');
         $table->create();
+
+        $table->insert([
+            'category_name' => 'Unsorted',
+        ])->save();
     }
 
     public function down(): void

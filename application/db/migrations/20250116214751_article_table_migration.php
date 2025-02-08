@@ -20,7 +20,7 @@ final class ArticleTableMigration extends AbstractMigration
     public function up(): void
     {
         $table = $this->table('articles');
-        $table->addColumn('category_id', 'integer');
+        $table->addColumn('category_id', 'integer', ['default' => 1]);
         $table->addColumn('title', 'string');
         $table->addColumn('content', 'text');
         $table->addColumn('published_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP']);
