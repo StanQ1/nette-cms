@@ -24,7 +24,6 @@ class ArticleServiceTest extends TestCase
     }
 
     /**
-     * @testdox Create article
      */
     public function testCreateArticle(): void
     {
@@ -41,7 +40,6 @@ class ArticleServiceTest extends TestCase
     }
 
     /**
-     * @testdox Find article
      * @throws Exception
      */
     public function testFindArticleById(): void
@@ -59,24 +57,13 @@ class ArticleServiceTest extends TestCase
         $this->assertEquals($mockObject, $result);
     }
 
-    /**
-     * @testdox Edit article
-     * @throws Exception
-     */
     public function testEditArticle(): void
     {
-        $mockObject = $this->createMock(ActiveRow::class);
-        $this->articleModelMock
-            ->expects($this->once())
-            ->method('findById')
-            ->with(2)
-            ->willReturn($mockObject);
-
         $this->articleModelMock
             ->expects($this->once())
             ->method('update')
             ->with(
-                id: 1,
+                id: 2,
                 data: [
                     'title' => 'title',
                     'category_id' => 1,
@@ -85,13 +72,12 @@ class ArticleServiceTest extends TestCase
             ->willReturn(true);
 
         $result = $this->articleService
-            ->editArticle(1, 'title', 1, 'content');
+            ->editArticle(2, 'title', 1, 'content');
 
         $this->assertTrue($result);
     }
 
     /**
-     * @testdox Delete article
      * @throws Exception
      */
     public function testDeleteArticle(): void
@@ -115,7 +101,6 @@ class ArticleServiceTest extends TestCase
 
 
     /**
-     * @testdox Get all articles
      * @throws Exception
      */
     public function testGetAllArticles(): void
@@ -131,7 +116,6 @@ class ArticleServiceTest extends TestCase
     }
 
     /**
-     * @testdox Get all articles by category
      * @throws Exception
      */
     public function testGetArticlesByCategoryId()
