@@ -1,0 +1,28 @@
+{layout ../../@layout.latte}
+
+{block content}
+<h1>Monitoring</h1>
+<p>This is your activities log table where you can monitor the system.</p>
+
+<!-- Table Section -->
+<h2>Recent Activities</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Action</th>
+        <th>Executor ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $recentActivities as $activity}
+        <tr>
+            <td>{$activity['id']}</td>
+            <td>{$activity['created_at']}</td>
+            <td>{$activity['action']}</td>
+            <td>{$activity['executor_id']}</td>
+        </tr>
+    {/foreach}
+    </tbody>
+</table>

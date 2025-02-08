@@ -3,7 +3,6 @@
 namespace App\Forms\Admin\Article;
 
 use Nette\Application\UI\Form;
-use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
 class ArticleEditForm

@@ -1,0 +1,30 @@
+{layout ../../@layout.latte}
+
+{block title}
+    Categories
+{/block}
+
+{block content}
+<div class="container mt-4 min-vw-50">
+    <div class="mb-4">
+        <h3 class="text-primary">All Categories</h3>
+        <a n:href="create" class="btn btn-success">+ Create New Category</a>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Category Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $categories as $category}
+            <tr>
+                <td>{$category['id']}</td>
+                <td>{$category['category_name']}</td>
+            </tr>
+        {/foreach}
+        </tbody>
+    </table>
+</div>

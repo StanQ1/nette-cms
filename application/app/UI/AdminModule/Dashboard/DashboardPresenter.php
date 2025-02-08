@@ -13,6 +13,13 @@ final class DashboardPresenter extends BasePresenter
     }
     public function renderDefault(): void
     {
-        $this->template->recentActivities = $this->actionLogService->getPageOfLatestActionLogs(10);
+        $logsArray = $this->actionLogService->getPageOfLatestActionLogs(10);
+        $this->template->recentActivities = array_reverse($logsArray);
+    }
+
+    public function renderMonitoring(): void
+    {
+        $logsArray = $this->actionLogService->getPageOfLatestActionLogs();
+        $this->template->recentActivities = array_reverse($logsArray);
     }
 }

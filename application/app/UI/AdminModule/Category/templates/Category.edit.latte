@@ -1,0 +1,21 @@
+{layout '../../@layout.latte'}
+
+{block title}
+    Editing "{$category->category_name}"
+{/block}
+
+{block content}
+    <div class="container mt-4">
+        <div class="card shadow-sm p-4">
+            <h3 class="text-primary mb-3">Edit Category Form</h3>
+            <form n:name="categoryEditForm" class="needs-validation" novalidate>
+                <div class="form-floating mb-3">
+                    <input type="text" id="category_name" name="category_name" class="form-control" placeholder="Category name:" required
+                           value="{$form['category_name']->value|escape}">
+                    <label for="category_name">Category name</label>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Edit</button>
+            </form>
+        </div>
+    </div>
+{/block}

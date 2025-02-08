@@ -56,6 +56,7 @@ final class ArticlePresenter extends Presenter
 
     public function renderCreate(): void
     {
+        $this->template->categories = $this->articleService->getAllCategories();
     }
 
     protected function createComponentArticleEditForm(): Form
@@ -107,6 +108,7 @@ final class ArticlePresenter extends Presenter
             ]);
 
         $this->template->article = $currentArticle;
+        $this->template->categories = $this->articleService->getAllCategories();
     }
 
     public function renderCategory(int $id): void

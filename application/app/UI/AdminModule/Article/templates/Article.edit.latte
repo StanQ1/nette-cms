@@ -1,11 +1,38 @@
-{layout ../../@layout.latte}
+{layout '../../@layout.latte'}
 
 {block title}
     Editing "{$article->title}"
 {/block}
 
 {block content}
-    Edit Article Form
-    {control articleEditForm}
+    <div class="container mt-4">
+        <div class="card shadow-sm p-4">
+            <h3 class="text-primary mb-3">Edit Article</h3>
+            <form n:name="articleEditForm" class="needs-validation" novalidate>
+                <input type="hidden" name="id" n:name="id" value="{$article->id}">
 
-{* TODO: Include modern tool to editing articles *}
+                <div class="form-floating mb-3">
+                    <input type="text" id="title" name="title" class="form-control" placeholder="Article Title" value="{$article->title}" required>
+                    <label for="title">Title</label>
+                    <div class="invalid-feedback">Title is required.</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea id="content" name="content" class="form-control" placeholder="Edit your content here..." rows="5" required>{$article->content}</textarea>
+                    <label for="content">Content</label>
+                    <div class="invalid-feedback">Content is required.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category:</label>
+                    <select id="category" name="category" class="form-select" required>
+                        <option value="" disabled>Pick a category</option>
+                        {foreach $categories as $category}
+                            <option value="{$category->category_id}" {if $article->category_id == $category->category_id}selected{/if}>{$category->category_name}</option>
+                        {/foreach}
+                    </select>
+                    <div class="invalid-feedback">Please select a category.</div>
+                </div>
+                <button type="submit" class="btn btn-warning w-100">Save Changes</button>
+            </form>
+        </div>
+    </div>
+{/block}

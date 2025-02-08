@@ -4,17 +4,17 @@ namespace App\Services;
 
 use App\Core\BaseModel;
 use Nette\Database\Table\ActiveRow;
-use Nette\Database\Table\Selection;
 
 class ActionLogService extends BaseModel
 {
     private string $table = 'action_logs';
 
-    public function getPageOfLatestActionLogs(int $index = 0): Selection|ActiveRow|array
+    public function getPageOfLatestActionLogs(int $index = 0): array
     {
-        $offset = $this->database->table($this->table)->count();
-        if ($offset >= $index) {
-            return $this->database->table($this->table)->limit($index, $offset);
+        $rows = $this->database->table($this->table)->count('id');
+
+        if ($rows > $index && $index > 0) {
+            return iterator_to_array($this->database->table($this->table)->limit($index, $rows - $index));
         } else {
             return $this->database->table($this->table)->fetchAll();
         }
