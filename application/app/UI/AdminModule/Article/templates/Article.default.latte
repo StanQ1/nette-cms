@@ -1,23 +1,33 @@
-{layout ../../@layout.latte}
+{layout '../../@layout.latte'}
 
 {block title}
     Articles
 {/block}
 
-{* TODO: Add search form to finding some articles by properties ( & ElasticSearch ) *}
 {block content}
-    <h3>All Articles</h3>
-    <a n:href="create">Create New Article</a>
-    <hr>
-    {foreach $articles as $article}
-        <h5>{$article->title}</h5>
-        <p>{$article->content}</p>
-        <p>{$article->published_at} –
-            <a n:href="category $article->category_id">
-                {$categories->get($article->category_id)->category_name}
-            </a>
-        </p>
-        <a n:href="edit $article->id">Edit</a>
-        <a n:href="delete $article->id">Delete</a>
-        <hr>
-    {/foreach}
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="text-primary">All Articles</h3>
+            <a n:href="create" class="btn btn-success">+ Create New Article</a>
+        </div>
+
+        {foreach $articles as $article}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-dark">{$article->title}</h5>
+                    <p class="card-text text-muted">{$article->content}</p>
+                    <p class="text-secondary small">
+                        <i class="bi bi-calendar"></i> {$article->published_at}
+                        | <a n:href="category $article->category_id" class="text-decoration-none">
+                            <span class="badge bg-info">{$categories->get($article->category_id)->category_name}</span>
+                        </a>
+                    </p>
+                    <div class="d-flex gap-2">
+                        <a n:href="edit $article->id" class="btn btn-warning btn-sm">Edit</a>
+                        <a n:href="delete $article->id" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {/foreach}
+    </div>
+{/block}
