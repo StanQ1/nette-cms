@@ -1,74 +1,62 @@
 {layout ../../@layout.latte}
 
 {block content}
-    <h1>Welcome, {$username}!</h1>
-    <p>This is your dashboard where you can manage the system.</p>
+<h1>Dashboard</h1>
+<p>This is your dashboard where you can manage the system.</p>
 
-    <!-- Cards Section -->
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card text-white bg-primary mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Users</h5>
-                    <p class="card-text">Manage and view user accounts.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-white bg-success mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Posts</h5>
-                    <p class="card-text">Manage and review posts.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-white bg-warning mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Settings</h5>
-                    <p class="card-text">Update system settings.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card text-white bg-danger mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Logout</h5>
-                    <p class="card-text">Sign out of the admin panel.</p>
-                </div>
+<!-- Cards Section -->
+<div class="row">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><a n:href=":Admin:Article:default">Articles</a></h5>
+                <p class="card-text">Manage and view blog articles.</p>
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><a n:href=":Front:Home:default">Went to Blog</a></h5>
+                <p class="card-text">Feels like at home.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><a n:href=":Setup:Setup:setup">Settings</a></h5>
+                <p class="card-text">Update system settings.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-danger mb-3">
+            <div class="card-body">
+                <h5 class="card-title"><a n:href=":Auth:Logout:default">Logout</a></h5>
+                <p class="card-text">Sign out of the admin panel.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Table Section -->
-    <h2>Recent Activities</h2>
-    <table class="table table-hover">
-        <thead>
+<!-- Table Section -->
+<h2>Recent Activities</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Action</th>
+        <th>Executor ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    {foreach $recentActivities as $activity}
         <tr>
-            <th>#</th>
-            <th>Activity</th>
-            <th>Date</th>
-            <th>Status</th>
+            <td>{$activity->created_at}</td>
+            <td>{$activity->action}</td>
+            <td>{$activity->executor_id} </td>
         </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>User John created a post</td>
-            <td>2025-01-05</td>
-            <td><span class="badge bg-success">Completed</span></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>User Alice updated settings</td>
-            <td>2025-01-04</td>
-            <td><span class="badge bg-warning">Pending</span></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>User Bob deleted a comment</td>
-            <td>2025-01-03</td>
-            <td><span class="badge bg-danger">Failed</span></td>
-        </tr>
-        </tbody>
-    </table>
+    {/foreach}
+    </tbody>
+</table>
