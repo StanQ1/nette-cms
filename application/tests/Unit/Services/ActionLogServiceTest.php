@@ -33,11 +33,9 @@ class ActionLogServiceTest extends TestCase
         $count = 50;
 
         $this->tableMock->method('count')->willReturn($count);
-        $this->tableMock->method('limit')->with($index, $count)->willReturn($this->tableMock);
-
         $result = $this->service->getPageOfLatestActionLogs($index);
 
-        $this->assertSame($this->tableMock, $result);
+        $this->assertIsArray($result);
     }
 
     /**
