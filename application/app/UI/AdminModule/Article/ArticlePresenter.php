@@ -4,6 +4,7 @@ namespace App\UI\AdminModule\Article;
 
 use App\Forms\Admin\Article\ArticleCreateForm;
 use App\Forms\Admin\Article\ArticleEditForm;
+use App\Services\ActionLogService;
 use App\Services\ArticleService;
 use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
@@ -11,7 +12,8 @@ use Nette\Application\UI\Presenter;
 final class ArticlePresenter extends Presenter
 {
     public function __construct(
-        private readonly ArticleService $articleService
+        private readonly ArticleService $articleService,
+        private readonly ActionLogService $actionLogService,
     ){
         parent::__construct();
     }
@@ -39,6 +41,12 @@ final class ArticlePresenter extends Presenter
         );
 
         if ($result) {
+            $user = $this->getSession()->getSection('user');
+            $this->actionLogService->createActionLog(
+                executorId: $user->get('userId'),
+                action: "User {$user->get('username')} has posted a new article: \"{$values->title}\"",
+            );
+
             $this->flashMessage("Article '$values->title' was successful created!");
             $this->redirect('default');
         } else {
@@ -72,6 +80,12 @@ final class ArticlePresenter extends Presenter
         );
 
         if ($result) {
+            $user = $this->getSession()->getSection('user');
+            $this->actionLogService->createActionLog(
+                executorId: $user->get('userId'),
+                action: "User {$user->get('username')} has successfully edit \"{$values->title}\" article",
+            );
+
             $this->flashMessage("Article '$values->title' was successful edited!");
             $this->redirect('default');
         } else {
@@ -106,10 +120,21 @@ final class ArticlePresenter extends Presenter
 
     public function actionDelete(int $id): void
     {
-        $result = $this->articleService->deleteArticle($id);
-        $response = $result ? 'You have successfully deleted article!'
-            : 'Article not found!';
-        $this->flashMessage($response);
+        $user = $this->getSession()->getSection('user');
+        $article = $this->articleService->findArticleById($id);
+
+        switch ($this->articleService->deleteArticle($id))
+        {
+            case true:
+                $this->flashMessage('You have successfully deleted article!');
+                $this->actionLogService->createActionLog(
+                    executorId: $user->get('userId'),
+                    action: "User {$user->get('username')} deleted \"{$article->title}\" article",
+                );
+                break;
+            case false:
+                $this->flashMessage('Article was not deleted or not founded!');
+        }
         $this->redirectPermanent(':Admin:Article:default');
     }
 }
